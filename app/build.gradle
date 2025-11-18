@@ -8,11 +8,63 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.shayleyeladim.app"
         minSdk 21
         targetSdk 34
         versionCode 1
         versionName "1.0"
+    }
+
+    // Product Flavors - One per website you want to allow
+    flavorDimensions "website"
+    productFlavors {
+        // Shay Le Yeladim
+        shayleyeladim {
+            dimension "website"
+            applicationId "com.kidsafe.shayleyeladim"
+            manifestPlaceholders = [appName: "Shay Le Yeladim"]
+            buildConfigField "String", "WEBSITE_URL", "\"https://shayleyeladim.org.il/%D7%A0%D7%95%D7%A9%D7%90%D7%99%D7%9D-%D7%A8%D7%90%D7%A9%D7%99%D7%99%D7%9D/%D7%A4%D7%A8%D7%A9%D7%AA-%D7%94%D7%A9%D7%91%D7%95%D7%A2.html\""
+            buildConfigField "String", "ALLOWED_DOMAIN", "\"shayleyeladim.org.il\""
+        }
+
+        // YouTube Kids (example)
+        youtubekids {
+            dimension "website"
+            applicationId "com.kidsafe.youtubekids"
+            manifestPlaceholders = [appName: "YouTube Kids"]
+            buildConfigField "String", "WEBSITE_URL", "\"https://www.youtubekids.com\""
+            buildConfigField "String", "ALLOWED_DOMAIN", "\"youtubekids.com\""
+        }
+
+        // Khan Academy Kids (example)
+        khanacademy {
+            dimension "website"
+            applicationId "com.kidsafe.khanacademy"
+            manifestPlaceholders = [appName: "Khan Academy"]
+            buildConfigField "String", "WEBSITE_URL", "\"https://www.khanacademy.org\""
+            buildConfigField "String", "ALLOWED_DOMAIN", "\"khanacademy.org\""
+        }
+
+        // PBS Kids (example)
+        pbskids {
+            dimension "website"
+            applicationId "com.kidsafe.pbskids"
+            manifestPlaceholders = [appName: "PBS Kids"]
+            buildConfigField "String", "WEBSITE_URL", "\"https://pbskids.org\""
+            buildConfigField "String", "ALLOWED_DOMAIN", "\"pbskids.org\""
+        }
+
+        // National Geographic Kids (example)
+        natgeokids {
+            dimension "website"
+            applicationId "com.kidsafe.natgeokids"
+            manifestPlaceholders = [appName: "Nat Geo Kids"]
+            buildConfigField "String", "WEBSITE_URL", "\"https://kids.nationalgeographic.com\""
+            buildConfigField "String", "ALLOWED_DOMAIN", "\"nationalgeographic.com\""
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

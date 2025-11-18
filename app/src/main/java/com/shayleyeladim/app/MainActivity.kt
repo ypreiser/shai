@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private val websiteUrl = "https://shayleyeladim.org.il/%D7%A0%D7%95%D7%A9%D7%90%D7%99%D7%9D-%D7%A8%D7%90%D7%A9%D7%99%D7%99%D7%9D/%D7%A4%D7%A8%D7%A9%D7%AA-%D7%94%D7%A9%D7%91%D7%95%D7%A2.html"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,22 +36,23 @@ class MainActivity : AppCompatActivity() {
         // Set WebViewClient to handle page navigation
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                // Allow navigation within the same domain
+                // Allow navigation only within the configured domain
                 url?.let {
-                    if (it.contains("shayleyeladim.org.il")) {
+                    if (it.contains(BuildConfig.ALLOWED_DOMAIN)) {
                         view?.loadUrl(it)
                         return true
                     }
                 }
-                return false
+                // Block all other URLs
+                return true
             }
         }
 
         // Set WebChromeClient for better browser functionality
         webView.webChromeClient = WebChromeClient()
 
-        // Load the website
-        webView.loadUrl(websiteUrl)
+        // Load the configured website
+        webView.loadUrl(BuildConfig.WEBSITE_URL)
     }
 
     // Handle back button to navigate through web history
